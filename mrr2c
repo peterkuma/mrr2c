@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
 import sys
-import pydash as py_
+import argparse
 import re
+import logging
+import pydash as py_
 import numpy as np
 import jdf
 from jdf.na import *
-import logging
 
 FORMAT = {
     'MRR_RAW': re.compile(r'^MRR +(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d) +(?P<time_zone>[^ ]+) +DVS +(?P<DVS>[^ ]+) +DSN +(?P<DSN>[^ ]+) +BW +(?P<BW>[^ ]+) +CC +(?P<CC>[^ ]+) +MDQ +(?P<MDQ1>[^ ]+) +(?P<MDQ2>[^ ]+) +(?P<MDQ3>[^ ]+) +TYP (?P<TYP>RAW)\s*$'),
@@ -501,7 +502,7 @@ def main(infile, outfile, debug=False):
     except Exception as e:
         errstr = '%s: %s' % (
             infile,
-            unicode(e)
+            getattr(e, 'strerror', unicode(e))
         )
         if not debug:
             logging.error(errstr)
@@ -510,8 +511,11 @@ def main(infile, outfile, debug=False):
     except KeyboardInterrupt:
         pass
 
-if len(sys.argv) < 3:
-    print('Usage: %s <infile> <outfile>' % sys.argv[0])
-    sys.exit(1)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to HDF5')
+    parser.add_argument('--debug', action='store_true', help='enable debugging')
+    parser.add_argument('infile', help='input file')
+    parser.add_argument('outfile', help='output file')
+    args = parser.parse_args()
 
-main(sys.argv[1], sys.argv[2], debug=False)
+    main(args.infile, args.outfile, debug=args.debug)
