@@ -4,12 +4,13 @@ Convert Metek MRR-2 data files to HDF5.
 
 ## Usage
 
-    mrr2c <infile> <outfile>
+    mrr2c [--debug] <infile> <outfile>
 
 Arguments:
 
 - `infile` - MRR-2 `raw`, `pro` or `ave` file
 - `outfile` - output file (HDF5)
+- `debug` - enable debugging output
 
 ## Install
 
