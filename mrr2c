@@ -8,8 +8,6 @@ import jdf
 from jdf.na import *
 import logging
 
-TIME_RE = re.compile('(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d)')
-
 FORMAT = {
     'MRR_RAW': re.compile(r'^MRR +(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d) +(?P<time_zone>[^ ]+) +DVS +(?P<DVS>[^ ]+) +DSN +(?P<DSN>[^ ]+) +BW +(?P<BW>[^ ]+) +CC +(?P<CC>[^ ]+) +MDQ +(?P<MDQ1>[^ ]+) +(?P<MDQ2>[^ ]+) +(?P<MDQ3>[^ ]+) +TYP (?P<TYP>RAW)\s*$'),
     'MRR_AVE': re.compile(r'^MRR +(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d) +(?P<time_zone>[^ ]+) +AVE +(?P<AVE>[^ ]+) +STP +(?P<STP>[^ ]+) +ASL +(?P<ASL>[^ ]+) +SMP +(?P<SMP>[^ ]+) +SVS +(?P<SVS>[^ ]+) +DVS +(?P<DVS>[^ ]+) +DSN +(?P<DSN>[^ ]+) +CC +(?P<CC>[^ ]+) +MDQ +(?P<MDQ1>[^ ]+) +TYP +(?P<TYP>AVE)\s*$'),
@@ -107,14 +105,6 @@ MRR_TYPES = {
     'TYP': str,
 }
 
-# def parse_time(s):
-#     m = TIME_RE.match(s)
-#     print(s)
-#     res = {k: int(v) for k, v in m.groupdict().iteritems()}
-#     return '20%(year)02d-%(month)02d-%(day)02dT%(hour)02d:%(minute)02d:%(second)02d' % (
-#         res
-#     )
-
 def format_time(year, month, day, hour, minute, second):
     return '20%(year)02d-%(month)02d-%(day)02dT%(hour)02d:%(minute)02d:%(second)02d' % locals()
 
@@ -128,45 +118,6 @@ def parse_mrr(s):
                 for k1, v1 in d.items()
             }
     return None
-
-# def parse_mrr(rec):
-#     print(rec)
-#     d = {
-#         'time': parse_time(rec[1]),
-#         'time_zone': rec[2],
-#     }
-
-#     i = 3
-#     while i < len(rec):
-#         k = rec[i]
-#         if k == 'DVS':
-#             d[k] = py_.nth(rec, i + 1)
-#             i += 1
-#         elif k == 'DSN':
-#             d[k] = py_.nth(rec, i + 1)
-#             i += 1
-#         elif k == 'BW':
-#             d[k] = float(py_.nth(rec, i + 1))
-#             i += 1
-#         elif k == 'CC':
-#             d[k] = float(py_.nth(rec, i + 1))
-#             i += 1
-#         elif k == 'MDQ':
-#             d[k] = [
-#                 int(py_.nth(rec, i + 1)),
-#                 int(py_.nth(rec, i + 2)),
-#                 int(py_.nth(rec, i + 3))
-#             ]
-#             i += 3
-#         elif k == 'TYP':
-#             d[k] = py_.nth(rec, i + 1)
-#             i += 1
-#         elif k == 'AVG':
-#             d[k] = py_.nth(rec, i + 1)
-#             i += 1
-#         i += 1
-
-#     return d
 
 def parse_int(rec):
     return np.array([
@@ -213,11 +164,8 @@ def parse_size(f):
 
     return d
 
-def parse(f, warning=lambda: None):
-    size = parse_size(f)
-    f.seek(0)
-
-    d = {
+def dataset_template(size):
+    return {
         'time': {
             '$data': np.zeros(size['nprof'], dtype='S19'),
             '$attributes': {
@@ -416,6 +364,94 @@ def parse(f, warning=lambda: None):
         }
     }
 
+def parse_line(line, d, size, fields, status):
+    i = status['i']
+    file_level = status['file_level']
+    level = status['level']
+
+    symbols = fields.keys()
+
+    field_width = max(1, (len(line) - 3)/size['nlev'])
+    rec = py_.concat(
+        py_.trim(py_.take(line, 3)),
+        py_.map_(py_.chunk(py_.drop(line, 3), field_width), lambda x: py_.trim(x))
+    )
+
+    if rec[0] == 'MRR':
+        i = i + 1 if i is not None else 0
+        res = parse_mrr(line)
+
+        if res is None:
+            raise IOError('Unrecognized line format')
+
+        level = res['TYP']
+        if file_level is not None and level != file_level:
+            raise IOError('Mixed processing levels')
+        else:
+            file_level = res['TYP']
+
+        d['time']['$data'][i] = format_time(**py_.pick(
+            res,
+            ('year', 'month', 'day', 'hour', 'minute', 'second')
+        ))
+        d['time_zone']['$data'][i] = res['time_zone']
+        for k, v in res.items():
+            if k in symbols:
+                x = fields[k]
+                name = x['name']
+                d[name]['$data'][i] = v
+
+    elif rec[0] in symbols or py_.nth(rec[0], 0) in symbols:
+        if i is None or file_level is None:
+            raise IOError('Unexpected line')
+
+        if file_level is not None and level != file_level:
+            raise IOError('Mixed processing levels')
+
+        if rec[0] in symbols:
+            x = fields[rec[0]]
+        else:
+            x = fields[py_.nth(rec[0], 0)]
+        name = x['name']
+
+        dtype = str(x['dtype'])
+        if x['spectral'] is True:
+            if dtype == 'float64':
+                res = parse_spectral_float(rec)
+            else:
+                raise AssertionError('Invalid dtype %s' % dtype)
+            if len(res[1]) != size['nlev']:
+                raise IOError('Unrecognized line format')
+            d[name]['$data'][i, :, res[0]] = res[1]
+        else:
+            if dtype == 'float64':
+                res = parse_float(rec)
+            elif dtype == 'int64':
+                res = parse_int(rec)
+            else:
+                raise AssertionError('Invalid dtype %s' % dtype)
+            if len(res) != size['nlev']:
+                raise IOError('Unrecognized line format')
+            d[name]['$data'][i, :] = res
+
+    elif line.startswith('C:') or line.startswith('R:'):
+        pass
+
+    else:
+        raise IOError('Unrecognized line format')
+
+    return {
+        'i': i,
+        'file_level': file_level,
+        'level': level,
+    }
+
+def mrr2c(f, warning=lambda: None):
+    size = parse_size(f)
+    f.seek(0)
+
+    d = dataset_template(size)
+
     fields = {
         v['$attributes']['symbol']: {
             'name': k,
@@ -426,71 +462,23 @@ def parse(f, warning=lambda: None):
         if py_.has(v, '$attributes.symbol')
     }
 
-    symbols = fields.keys()
+    file_level = None
+    level = None
 
-    # level = None
-
-    def parse_line(line, i):
-        field_width = max(1, (len(line) - 3)/size['nlev'])
-        rec = py_.concat(
-            py_.trim(py_.take(line, 3)),
-            py_.map_(py_.chunk(py_.drop(line, 3), field_width), lambda x: py_.trim(x))
-        )
-        if rec[0] == 'MRR':
-            i = i + 1 if i is not None else 0
-            res = parse_mrr(line)
-            if res is None:
-                raise IOError('Unrecognized line format')
-            d['time']['$data'][i] = format_time(**py_.pick(
-                res,
-                ('year', 'month', 'day', 'hour', 'minute', 'second')
-            ))
-            d['time_zone']['$data'][i] = res['time_zone']
-            for k, v in res.items():
-                if k in symbols:
-                    x = fields[k]
-                    name = x['name']
-                    d[name]['$data'][i] = v
-            # if level is not None and res['TYP'] != level:
-            #     raise IOError('Mixed processing levels')
-            # level = res['TYP']
-        elif rec[0] in symbols or py_.nth(rec[0], 0) in symbols:
-            # if i is None:
-            #     raise IOError('Unexpected line')
-            if rec[0] in symbols:
-                x = fields[rec[0]]
-            else:
-                x = fields[py_.nth(rec[0], 0)]
-            name = x['name']
-            dtype = str(x['dtype'])
-            if x['spectral'] is True:
-                if dtype == 'float64':
-                    res = parse_spectral_float(rec)
-                else:
-                    raise AssertionError('Invalid dtype %s' % dtype)
-                if len(res[1]) != size['nlev']:
-                    raise IOError('Unrecognized line format')
-                d[name]['$data'][i, :, res[0]] = res[1]
-            else:
-                if dtype == 'float64':
-                    res = parse_float(rec)
-                elif dtype == 'int64':
-                    res = parse_int(rec)
-                else:
-                    raise AssertionError('Invalid dtype %s' % dtype)
-                if len(res) != size['nlev']:
-                    raise IOError('Unrecognized line format')
-                d[name]['$data'][i, :] = res
-        elif line.startswith('C:') or line.startswith('R:'):
-            pass
-        else:
-            raise IOError('Unrecognized line format')
-        return i
-
-    i = None
+    status = {
+        'i': None,
+        'file_level': None,
+        'level': None
+    }
     for line_number, line in enumerate(f.readlines()):
         try:
-            i = parse_line(py_.trim_end(line, '\r\n'), i)
+            status = parse_line(
+                py_.trim_end(line, '\r\n'),
+                d,
+                size,
+                fields,
+                status
+            )
         except Exception as e:
             try:
                 raise IOError, 'Error parsing line %d: %s' % (
@@ -500,17 +488,30 @@ def parse(f, warning=lambda: None):
             except Exception as e:
                 warning(e)
 
-    return d
+    names = FIELDS.get(status['file_level'], [])
+    return py_.pick(d, names)
 
 def main(infile, outfile, debug=False):
     try:
         with open(infile) as f:
-            d = parse(f, warning=lambda w: logging.warning(unicode(w)))
+            def warning(s):
+                logging.warning('%s: %s' % (infile, unicode(s)))
+            d = mrr2c(f, warning=warning)
             jdf.to_hdf(d, outfile)
     except Exception as e:
+        errstr = '%s: %s' % (
+            infile,
+            unicode(e)
+        )
         if not debug:
-            logging.error(unicode(e))
+            logging.error(errstr)
         else:
-            raise
+            raise IOError, errstr, sys.exc_info()[2]
+    except KeyboardInterrupt:
+        pass
 
-main(sys.argv[1], sys.argv[2], debug=True)
+if len(sys.argv) < 3:
+    print('Usage: %s <infile> <outfile>' % sys.argv[0])
+    sys.exit(1)
+
+main(sys.argv[1], sys.argv[2], debug=False)
