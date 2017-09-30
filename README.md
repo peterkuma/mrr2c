@@ -1,6 +1,6 @@
 # mrr2c
 
-Convert Metek MRR-2 data files to HDF5.
+Convert Metek MRR-2 data files to HDF.
 
 ## Usage
 
@@ -21,28 +21,26 @@ Requirements:
 - Python 2.7
 - pip
 - libhdf5
-- Python packages:
-    - numpy >= 1.12.1
-    - h5py >= 2.2.1
-    - pydash >= 4.0.3
 
-Install required python packages with pip:
+Python packages:
 
-    pip install -r requirements.txt
+- numpy >= 1.12.1
+- h5py >= 2.2.1
+- pydash >= 4.0.3
 
-Install mrr2c:
+To install with the Python package manager
+(automatically installs required packages):
 
+    pip install mrr2c
+
+To install from source:
+
+    pip install numpy h5py pydash
     python setup.py install
 
-or
+## Variables
 
-    python setup.py install --user
-
-for installation in the home directory.
-
-## Fields
-
-The following fields are supported:
+The following variables are supported:
 
 - **attenuated_radar_reflectivity** (dbZ)
 - **averaging_time** (s)
@@ -71,28 +69,21 @@ The following fields are supported:
 - **valid_spectra_percentage** (%)
 - **valid_spectra**
 
+## Release Notes
+
+### 1.0.1 (2017-09-30)
+
+- PyPI package.
+- Improved documentation.
+
+### 1.0 (2017-06-09)
+
+- Initial release.
+
 ## License
 
-This program is available under the terms of the MIT license.
+MIT license (see [LICENSE.md](LICENSE.md))
 
-    MIT License
+## Contact
 
-    Copyright (c) 2017 Peter Kuma
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
+Peter Kuma <<peter.kuma@fastmail.com>>
