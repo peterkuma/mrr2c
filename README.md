@@ -40,34 +40,36 @@ To install from source:
 
 ## Variables
 
-The following variables are supported:
+Supported variables are listed in the table below.
 
-- **attenuated_radar_reflectivity** (dbZ)
-- **averaging_time** (s)
-- **bandwidth**
-- **calibration_constant**
-- **device_serial_number** (string)
-- **drop_size** (mm)
-- **fall_velocity** (m.s^-1)
-- **firmware_version** (string)
-- **height_resolution** (m)
-- **height** (m)
-- **level** (string)
-- **liquid_water_content** (g.m^-3)
-- **path_integrated_attenuation** (dB)
-- **radar_altitude** (m)
-- **radar_reflectivity** (dbZ)
-- **rain_rate** (mm.h^-1)
-- **sampling_rate** (Hz)
-- **service_version** (string)
-- **spectral_drop_density** (m^-3.mm^-1)
-- **spectral_reflectivity** (dB)
-- **time_zone** (string)
-- **time** (string)
-- **total_spectra**
-- **transfer_function**
-- **valid_spectra_percentage** (%)
-- **valid_spectra**
+| Variable | Units | Symbol | Description |
+| --- | --- |
+| attenuated_radar_reflectivity | dbZ | z | Attenuated radar reflectivity |
+| averaging_time | s | AVE | Averaging time |
+| bandwidth | | BW | Bandwidth |
+| calibration_constant | | CC | Calibration constant |
+| device_serial_number | string | DSN | Device serial number |
+| drop_size | mm | D | Drop size |
+| fall_velocity | m.s<sup>-1</sup> | W | Fall velocity |
+| firmware_version | string | DVS | Firmware version |
+| height_resolution | m | STP | Height resolution |
+| height | m | H | Height |
+| level | string | TYP | Processing level |
+| liquid_water_content | g.m<sup>-3</sup> | LWC | Liquid water content |
+| path_integrated_attenuation | dB | PIA | Path integrated attenuation |
+| radar_altitude | m | ASL | Radar altitude |
+| radar_reflectivity | dbZ | Z | Radar reflectivity |
+| rain_rate | mm.h<sup>-1</sup> | RR | Rain rate |
+| sampling_rate | Hz | SMP | Sampling rate |
+| service_version | string | SVS | Service version |
+| spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density |
+| spectral_reflectivity | dB | F | Spectral reflectivity |
+| time_zone | string | Time zone |
+| time | ISO 8601 | Time |
+| total_spectra | | MDQ3 | Number of total spectra |
+| transfer_function | | TF | Transfer function |
+| valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra |
+| valid_spectra | | MDQ2 | Number of valid spectra |
 
 ## Release Notes
 
