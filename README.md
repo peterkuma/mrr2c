@@ -43,7 +43,7 @@ To install from source:
 Supported variables are listed in the table below.
 
 | Variable | Units | Symbol | Description |
-| --- | --- |
+| --- | --- | --- | --- |
 | attenuated_radar_reflectivity | dbZ | z | Attenuated radar reflectivity |
 | averaging_time | s | AVE | Averaging time |
 | bandwidth | | BW | Bandwidth |
@@ -64,8 +64,8 @@ Supported variables are listed in the table below.
 | service_version | string | SVS | Service version |
 | spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density |
 | spectral_reflectivity | dB | F | Spectral reflectivity |
-| time_zone | string | Time zone |
-| time | ISO 8601 | Time |
+| time_zone | string | | Time zone |
+| time | ISO 8601 | | Time |
 | total_spectra | | MDQ3 | Number of total spectra |
 | transfer_function | | TF | Transfer function |
 | valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra |
