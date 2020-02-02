@@ -2,17 +2,31 @@
 
 Convert Metek MRR-2 data files to HDF.
 
+mrr2c is an open source program which converts Metek Micro Rain Radar 2 (MRR-2)
+data to HDF. RAW, PRO and AVE files are supported.
+
 ## Usage
 
-    mrr2c [--debug] <infile> <outfile>
+```sh
+mrr2c [--debug] <infile> <outfile>
+```
 
 Arguments:
 
-- `infile` - MRR-2 `raw`, `pro` or `ave` file
-- `outfile` - output file (HDF5)
-- `debug` - enable debugging output
+- `infile`: Input MRR-2 `.raw`, `.pro` or `.ave` file.
+- `outfile`: Output HDF5 (`.h5`) file.
 
-## Install
+Options:
+
+- `--debug`: Enable debugging output.
+
+See also the man page:
+
+```sh
+man mrr2c
+```
+
+## Installation
 
 It is recommended to run mrr2c on Linux or a unix-like operating system.
 
@@ -31,12 +45,16 @@ Python packages:
 To install with the Python package manager
 (automatically installs required packages):
 
-    pip install mrr2c
+```sh
+pip install mrr2c
+```
 
 To install from source:
 
-    pip install numpy h5py pydash
-    python setup.py install
+```sh
+pip install numpy h5py pydash
+python setup.py install
+```
 
 ## Variables
 
@@ -73,6 +91,10 @@ Supported variables are listed in the table below.
 
 ## Release Notes
 
+### 1.0.2 (2020-02-02)
+
+- Add man page.
+
 ### 1.0.1 (2017-09-30)
 
 - PyPI package.
@@ -84,11 +106,13 @@ Supported variables are listed in the table below.
 
 ## License
 
-MIT license (see [LICENSE.md](LICENSE.md))
+mrr2c can be used, modified and distributed freely under the terms
+of an MIT license (see [LICENSE.md](LICENSE.md)).
 
 ## Contact
 
-Peter Kuma <<peter.kuma@fastmail.com>>
+Please contact Peter Kuma <<peter.kuma@fastmail.com>> regarding support
+or bugs or use the GitHub Issues.
 
 ## See also
 
