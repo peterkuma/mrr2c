@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys
 import argparse
@@ -492,7 +492,7 @@ def mrr2c(f, warning=lambda: None):
     names = FIELDS.get(status['file_level'], [])
     return py_.pick(d, names)
 
-def main(infile, outfile, debug=False):
+def main_(infile, outfile, debug=False):
     try:
         with open(infile) as f:
             def warning(s):
@@ -511,11 +511,14 @@ def main(infile, outfile, debug=False):
     except KeyboardInterrupt:
         pass
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to HDF5')
     parser.add_argument('--debug', action='store_true', help='enable debugging')
     parser.add_argument('infile', help='input file')
     parser.add_argument('outfile', help='output file')
     args = parser.parse_args()
 
-    main(args.infile, args.outfile, debug=args.debug)
+    main_(args.infile, args.outfile, debug=args.debug)
+
+if __name__ == '__main__':
+    main()

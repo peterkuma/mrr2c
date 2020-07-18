@@ -32,7 +32,7 @@ It is recommended to run mrr2c on Linux or a unix-like operating system.
 
 Requirements:
 
-- Python 2.7
+- Python 2.7 (Python 3 is currently not supported)
 - pip
 - libhdf5
 
@@ -91,6 +91,10 @@ Supported variables are listed in the table below.
 
 ## Release Notes
 
+### 1.0.3 (2020-07-18)
+
+- Fixed installation on Windows.
+
 ### 1.0.2 (2020-02-02)
 
 - Add man page.
@@ -111,7 +115,7 @@ of an MIT license (see [LICENSE.md](LICENSE.md)).
 
 ## Contact
 
-Please contact Peter Kuma <<peter.kuma@fastmail.com>> regarding support
+Please contact Peter Kuma <<peter@peterkuma.net>> regarding support
 or bugs or use the GitHub Issues.
 
 ## See also
