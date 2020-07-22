@@ -8,7 +8,7 @@ setup(
     entry_points={
         'console_scripts': ['mrr2c=mrr2c:main'],
     },
-    description='Convert Metek MRR-2 data files to HDF',
+    description='Convert Metek MRR-2 micro rain radar data files to HDF',
     author='Peter Kuma',
     author_email='peter@peterkuma.net',
     data_files=[('share/man/man1', ['mrr2c.1'])],

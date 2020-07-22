@@ -1,6 +1,6 @@
 # mrr2c
 
-Convert Metek MRR-2 data files to HDF.
+Convert Metek MRR-2 micro rain radar data files to HDF.
 
 mrr2c is an open source program which converts Metek Micro Rain Radar 2 (MRR-2)
 data to HDF. RAW, PRO and AVE files are supported.
