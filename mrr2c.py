@@ -225,9 +225,6 @@ def sdecode(x):
 	return x if (sys.version_info[0] == 2 or type(x) is not bytes) \
 		else x.decode('ascii', errors='ignore')
 
-def format_time(year, month, day, hour, minute, second):
-	return '20%(year)02d-%(month)02d-%(day)02dT%(hour)02d:%(minute)02d:%(second)02d' % locals()
-
 def parse_mrr(s):
 	for k, v in list(FORMAT.items()):
 		m = v.match(s)
