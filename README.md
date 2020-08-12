@@ -69,7 +69,7 @@ and 9223372036854775807 in the integer (int64) variables.
 | device_serial_number | string | DSN | Device serial number | S16 |
 | drop_size | mm | D | Drop size | float64 |
 | fall_velocity | m.s<sup>-1</sup> | W | Fall velocity | float64 |
-| firmware_version | string | DVS | Firmware version | float64 |
+| firmware_version | string | DVS | Firmware version | S16 |
 | height_resolution | m | STP | Height resolution | float64 |
 | height | m | H | Height | float64 |
 | level | 1 | | Level number | int64 |
@@ -83,7 +83,7 @@ and 9223372036854775807 in the integer (int64) variables.
 | service_version | string | SVS | Service version | S16 |
 | spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density | float64 |
 | spectral_reflectivity | dB | F | Spectral reflectivity | float64 |
-| time_zone | string | | Time zone | float64 |
+| time_zone | string | | Time zone | S8 |
 | time | days since -4712-01-01T12:00:00 | | Time | float64 |
 | total_spectra | 1 | MDQ3 | Number of total spectra | int64 |
 | transfer_function | | TF | Transfer function | float64 |
