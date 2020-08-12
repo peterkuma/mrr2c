@@ -56,36 +56,39 @@ Supported variables are listed in the table below.
 Time is expressed as Julian date. To calculate UNIX time (number of seconds
 since 1970-01-01 00:00), use the formula `(time - 2440587.5)*86400`.
 
-| Variable | Units | Symbol | Description |
-| --- | --- | --- | --- |
-| attenuated_radar_reflectivity | dbZ | z | Attenuated radar reflectivity |
-| averaging_time | s | AVE | Averaging time |
-| band | 1 | Band number |
-| bandwidth | | BW | Bandwidth |
-| calibration_constant | | CC | Calibration constant |
-| device_serial_number | string | DSN | Device serial number |
-| drop_size | mm | D | Drop size |
-| fall_velocity | m.s<sup>-1</sup> | W | Fall velocity |
-| firmware_version | string | DVS | Firmware version |
-| height_resolution | m | STP | Height resolution |
-| height | m | H | Height |
-| level | 1 | | Level number |
-| liquid_water_content | g.m<sup>-3</sup> | LWC | Liquid water content |
-| path_integrated_attenuation | dB | PIA | Path integrated attenuation |
-| processing_level | string | TYP | Processing level |
-| radar_altitude | m | ASL | Radar altitude |
-| radar_reflectivity | dbZ | Z | Radar reflectivity |
-| rain_rate | mm.h<sup>-1</sup> | RR | Rain rate |
-| sampling_rate | Hz | SMP | Sampling rate |
-| service_version | string | SVS | Service version |
-| spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density |
-| spectral_reflectivity | dB | F | Spectral reflectivity |
-| time_zone | string | | Time zone |
-| time | days since -4712-01-01T12:00:00 | | Time |
-| total_spectra | 1 | MDQ3 | Number of total spectra |
-| transfer_function | | TF | Transfer function |
-| valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra |
-| valid_spectra | 1 | MDQ2 | Number of valid spectra |
+Missing values are expressed as NaN in the floating point (float64) variables
+and 9223372036854775807 in the integer (int64) variables.
+
+| Variable | Units | Symbol | Description | Type |
+| --- | --- | --- | --- | --- |
+| attenuated_radar_reflectivity | dbZ | z | Attenuated radar reflectivity | float64 |
+| averaging_time | s | AVE | Averaging time | float64 |
+| band | 1 | Band number | int64 |
+| bandwidth | | BW | Bandwidth | float64 |
+| calibration_constant | | CC | Calibration constant | float64 |
+| device_serial_number | string | DSN | Device serial number | S16 |
+| drop_size | mm | D | Drop size | float64 |
+| fall_velocity | m.s<sup>-1</sup> | W | Fall velocity | float64 |
+| firmware_version | string | DVS | Firmware version | float64 |
+| height_resolution | m | STP | Height resolution | float64 |
+| height | m | H | Height | float64 |
+| level | 1 | | Level number | int64 |
+| liquid_water_content | g.m<sup>-3</sup> | LWC | Liquid water content | float64 |
+| path_integrated_attenuation | dB | PIA | Path integrated attenuation | float64 |
+| processing_level | string | TYP | Processing level | S3 |
+| radar_altitude | m | ASL | Radar altitude | float64 |
+| radar_reflectivity | dbZ | Z | Radar reflectivity | float64 |
+| rain_rate | mm.h<sup>-1</sup> | RR | Rain rate | float64 |
+| sampling_rate | Hz | SMP | Sampling rate | float64 |
+| service_version | string | SVS | Service version | S16 |
+| spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density | float64 |
+| spectral_reflectivity | dB | F | Spectral reflectivity | float64 |
+| time_zone | string | | Time zone | float64 |
+| time | days since -4712-01-01T12:00:00 | | Time | float64 |
+| total_spectra | 1 | MDQ3 | Number of total spectra | int64 |
+| transfer_function | | TF | Transfer function | float64 |
+| valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra | float64 |
+| valid_spectra | 1 | MDQ2 | Number of valid spectra | int64 |
 
 ### Attributes
 
