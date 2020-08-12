@@ -82,10 +82,10 @@ since 1970-01-01 00:00), use the formula `(time - 2440587.5)*86400`.
 | spectral_reflectivity | dB | F | Spectral reflectivity |
 | time_zone | string | | Time zone |
 | time | days since -4712-01-01T12:00:00 | | Time |
-| total_spectra | | MDQ3 | Number of total spectra |
+| total_spectra | 1 | MDQ3 | Number of total spectra |
 | transfer_function | | TF | Transfer function |
 | valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra |
-| valid_spectra | | MDQ2 | Number of valid spectra |
+| valid_spectra | 1 | MDQ2 | Number of valid spectra |
 
 ### Attributes
 
