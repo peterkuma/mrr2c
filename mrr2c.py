@@ -16,6 +16,8 @@ import aquarius_time as aq
 
 __version__ = '2.0.0'
 
+NA_INT64 = -9223372036854775808
+
 FORMAT = {
 	'MRR_RAW': re.compile(r'^MRR +(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d) +(?P<time_zone>[^ ]+) +DVS +(?P<DVS>[^ ]+) +DSN +(?P<DSN>[^ ]+) +BW +(?P<BW>[^ ]+) +CC +(?P<CC>[^ ]+) +MDQ +(?P<MDQ1>[^ ]+) +(?P<MDQ2>[^ ]+) +(?P<MDQ3>[^ ]+) +TYP (?P<TYP>RAW)\s*$'),
 	'MRR_AVE': re.compile(r'^MRR +(?P<year>\d\d)(?P<month>\d\d)(?P<day>\d\d)(?P<hour>\d\d)(?P<minute>\d\d)(?P<second>\d\d) +(?P<time_zone>[^ ]+) +AVE +(?P<AVE>[^ ]+) +STP +(?P<STP>[^ ]+) +ASL +(?P<ASL>[^ ]+) +SMP +(?P<SMP>[^ ]+) +SVS +(?P<SVS>[^ ]+) +DVS +(?P<DVS>[^ ]+) +DSN +(?P<DSN>[^ ]+) +CC +(?P<CC>[^ ]+) +MDQ +(?P<MDQ1>[^ ]+) +TYP +(?P<TYP>AVE)\s*$'),
@@ -30,16 +32,19 @@ META = {
 	},
 	'level': {
 		'.dims': ['level'],
+		'.dtype': 'int64',
 		'long_name': 'level number',
 		'units': 1,
 	},
 	'band': {
 		'.dims': ['band'],
+		'.dtype': 'int64',
 		'long_name': 'band number',
 		'units': 1,
 	},
 	'time_zone': {
 		'.dims': ['time'],
+		'.dtype': 'S8',
 		'long_name': 'time zone',
 	},
 	'height': {
@@ -185,6 +190,14 @@ META = {
 	}
 }
 
+for v in META.values():
+	if '.dtype' in v and v['.dtype'].startswith('S'):
+		continue
+	elif '.dtype' in v and v['.dtype'] == 'int64':
+		v['_FillValue'] = v['missing_value'] = NA_INT64
+	else: # float64
+		v['_FillValue'] = v['missing_value'] = np.nan
+
 MRR_TYPES = {
 	'year': int,
 	'month': int,
@@ -207,8 +220,6 @@ MRR_TYPES = {
 	'MDQ3': int,
 	'TYP': str,
 }
-
-NA_INT64 = 9223372036854775807
 
 def sdecode(x):
 	return x if (sys.version_info[0] == 2 or type(x) is not bytes) \

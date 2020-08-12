@@ -59,7 +59,9 @@ The epoch of the Julian date is not necessarily in UTC. Use the `time_zone`
 variable to determine the offset.
 
 Missing values are expressed as NaN in the floating point (float64) variables
-and 9223372036854775807 in the integer (int64) variables.
+and -9223372036854775808 in the integer (int64) variables. The `_FillValue`
+and `missing_value` attributes of each numerical variable contain the
+respective missing value.
 
 | Variable | Units | Symbol | Description | Type |
 | --- | --- | --- | --- | --- |
