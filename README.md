@@ -104,7 +104,7 @@ respective missing value.
 
 ## Release Notes
 
-### 2.0.0 (2020-08-11)
+### 2.0.1 (2020-08-11)
 
 - Support for Python 3.
 - Changed output format to NetCDF.
