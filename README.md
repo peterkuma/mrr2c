@@ -63,7 +63,7 @@ and 9223372036854775807 in the integer (int64) variables.
 | --- | --- | --- | --- | --- |
 | attenuated_radar_reflectivity | dbZ | z | Attenuated radar reflectivity | float64 |
 | averaging_time | s | AVE | Averaging time | float64 |
-| band | 1 | Band number | int64 |
+| band | 1 | | Band number | int64 |
 | bandwidth | | BW | Bandwidth | float64 |
 | calibration_constant | | CC | Calibration constant | float64 |
 | device_serial_number | string | DSN | Device serial number | S16 |
