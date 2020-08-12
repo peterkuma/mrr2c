@@ -395,9 +395,11 @@ def mrr2c(f, warning=lambda: None):
 	d = {}
 	d['.'] = META
 
-	d['.']['software'] = 'mrr2c (https://github.com/peterkuma/mrr2c)'
-	d['.']['version'] = __version__
-	d['.']['created'] = dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+	d['.']['.'] = {
+		'software': 'mrr2c (https://github.com/peterkuma/mrr2c)',
+		'version': __version__,
+		'created': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
+	}
 
 	d['level'] = np.arange(s['nlevels'], dtype=np.int64)
 	d['band'] = np.arange(s['nbands'], dtype=np.int64)
