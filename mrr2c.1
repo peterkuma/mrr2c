@@ -1,30 +1,30 @@
 .TH mrr2c 1 02/02/2020
 
 .SH NAME
-mrr2c \- convert Metek MRR-2 data files to HDF
+mrr2c \- convert Metek MRR-2 data files to NetCDF
 
 .SH SYNOPSIS
 .B mrr2c
 [--debug]
-.I infile
-.I outfile
+.I input
+.I output
 
 .SH DESCRIPTION
 
 .B mrr2c
 is an open source program which converts Metek Micro Rain Radar 2 (MRR-2)
-data to HDF. RAW, PRO and AVE files are supported.
+data to NetCDF. RAW, PRO and AVE files are supported.
 
-.I infile
+.I input
 is an input MRR-2
 .IR .raw,
 .I .pro
 or
 .I .ave
 file.
-.I outfile
-is an output HDF5
-.RI ( .h5 )
+.I output
+is an output NetCDF
+.RI ( .nc )
 file.
 
 .SH OPTIONS
