@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import signal
 signal.signal(signal.SIGINT, lambda signal, frame: sys.exit(0))
 
@@ -14,7 +12,7 @@ import numpy as np
 import ds_format as ds
 import aquarius_time as aq
 
-__version__ = '2.0.1'
+__version__ = '2.0.2'
 
 NA_INT64 = -9223372036854775808
 
