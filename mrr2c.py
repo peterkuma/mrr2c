@@ -131,12 +131,14 @@ META = {
 		'.dtype': 'int64',
 		'long_name': 'number of valid spectra',
 		'symbol': 'MDQ2',
+		'units': '1',
 	},
 	'total_spectra': {
 		'.dims': ['time'],
 		'.dtype': 'int64',
 		'long_name': 'number of total spectra',
 		'symbol': 'MDQ3',
+		'units': '1',
 	},
 	'firmware_version': {
 		'.dims': ['time'],
