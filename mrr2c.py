@@ -71,7 +71,7 @@ META = {
 	'spectral_drop_density': {
 		'.dims': ['time', 'level', 'band'],
 		'long_name': 'spectral drop density',
-		'units': 'm^{-3} mm^{-1}',
+		'units': 'm-3 mm-1',
 		'symbol': 'N',
 	},
 	'path_integrated_attenuation': {
@@ -95,19 +95,19 @@ META = {
 	'rain_rate': {
 		'.dims': ['time', 'level'],
 		'long_name': 'rain rate',
-		'units': 'mm h^{-1}',
+		'units': 'mm h-1',
 		'symbol': 'RR',
 	},
 	'liquid_water_content': {
 		'.dims': ['time', 'level'],
 		'long_name': 'liquid water content',
-		'units': 'g m^{-3}',
+		'units': 'g m-3',
 		'symbol': 'LWC',
 	},
 	'fall_velocity': {
 		'.dims': ['time', 'level'],
 		'long_name': 'fall velocity',
-		'units': 'm s^{-1}',
+		'units': 'm s-1',
 		'symbol': 'W',
 	},
 	'calibration_constant': {
