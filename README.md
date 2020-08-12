@@ -54,7 +54,7 @@ environmental variable).
 Supported variables are listed in the table below.
 
 Time is expressed as Julian date. To calculate UNIX time (number of seconds
-since 1970-01-01 00:00), use the forumla `(time - 2440587.5)*86400`.
+since 1970-01-01 00:00), use the formula `(time - 2440587.5)*86400`.
 
 | Variable | Units | Symbol | Description |
 | --- | --- | --- | --- |
