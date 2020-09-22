@@ -12,7 +12,7 @@ import numpy as np
 import ds_format as ds
 import aquarius_time as aq
 
-__version__ = '2.0.2'
+__version__ = '2.1.0'
 
 NA_INT64 = -9223372036854775808
 
@@ -71,7 +71,7 @@ META = {
 	'spectral_drop_density': {
 		'.dims': ['time', 'level', 'band'],
 		'long_name': 'spectral drop density',
-		'units': 'm^{-3} mm^{-1}',
+		'units': 'm-3 mm-1',
 		'symbol': 'N',
 	},
 	'path_integrated_attenuation': {
@@ -95,19 +95,19 @@ META = {
 	'rain_rate': {
 		'.dims': ['time', 'level'],
 		'long_name': 'rain rate',
-		'units': 'mm h^{-1}',
+		'units': 'mm h-1',
 		'symbol': 'RR',
 	},
 	'liquid_water_content': {
 		'.dims': ['time', 'level'],
 		'long_name': 'liquid water content',
-		'units': 'g m^{-3}',
+		'units': 'g m-3',
 		'symbol': 'LWC',
 	},
 	'fall_velocity': {
 		'.dims': ['time', 'level'],
 		'long_name': 'fall velocity',
-		'units': 'm s^{-1}',
+		'units': 'm s-1',
 		'symbol': 'W',
 	},
 	'calibration_constant': {
@@ -131,12 +131,14 @@ META = {
 		'.dtype': 'int64',
 		'long_name': 'number of valid spectra',
 		'symbol': 'MDQ2',
+		'units': '1',
 	},
 	'total_spectra': {
 		'.dims': ['time'],
 		'.dtype': 'int64',
 		'long_name': 'number of total spectra',
 		'symbol': 'MDQ3',
+		'units': '1',
 	},
 	'firmware_version': {
 		'.dims': ['time'],
