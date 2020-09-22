@@ -26,7 +26,7 @@ META = {
 	'time': {
 		'.dims': ['time'],
 		'long_name': 'time',
-		'units': 'days since -4712-01-01T12:00:00',
+		'units': 'days since -4713-01-01 12:00 UTC',
 	},
 	'level': {
 		'.dims': ['level'],
