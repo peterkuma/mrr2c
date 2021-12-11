@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mrr2c',
-    version='2.1.0',
+    version='2.1.1',
     packages=find_packages(),
     py_modules=['mrr2c'],
     entry_points={
@@ -15,7 +15,7 @@ setup(
     install_requires=[
         'pydash>=4.0.3',
         'numpy>=1.12.1',
-        'ds-format>=1.0.0',
+        'ds-format>=1.1.1',
         'aquarius-time>=0.1.0',
 		'cftime>=1.5.1',
     ],
@@ -27,7 +27,6 @@ setup(
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Topic :: Scientific/Engineering :: Atmospheric Science',
     ],

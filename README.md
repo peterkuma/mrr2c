@@ -35,15 +35,13 @@ It is recommended to run mrr2c on Linux or a unix-like operating system.
 
 Requirements:
 
-- Python 2.7 or 3 or a compatible distribution of Python such as Anaconda
+- Python 3 or a compatible distribution of Python such as Anaconda
 
 To install mrr2c and dependencies with the Python package manager:
 
 ```sh
 pip3 install mrr2c
 ```
-
-**Note:** Replace `pip3` with `pip` to install with Python 2.7.
 
 **Note:** Append `--user` to install in your home directory on an unix-like
 operating system (make sure `~/.local/bin` is included in the `PATH`
@@ -104,6 +102,11 @@ respective missing value.
 | created | Time when the file was created (ISO 8601 UTC) |
 
 ## Release Notes
+
+### 2.1.1 (2021-12-11)
+
+- Changed time variable calendar to proleptic\_gregorian.
+- Dropped support for Python 2.
 
 ### 2.1.0 (2020-08-13)
 
