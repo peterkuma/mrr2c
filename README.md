@@ -54,8 +54,9 @@ environmental variable).
 Supported variables are listed in the table below.
 
 Time is expressed as Julian date (fractional number of days since -4712-01-01
-12:00 UTC). To calculate UNIX time (number of seconds since 1 January 1970
-00:00), use the formula `(time - 2440587.5)*86400`. The time zone depends on
+12:00 UTC, or -4713-11-24 12:00 UTC in the proleptic Gregorian calendar). To
+calculate UNIX time (number of seconds since 1 January 1970 00:00), use the
+formula `(time - 2440587.5)*86400`. The time zone depends on
 the raw data. Use the `time_zone` variable to determine the offset.
 
 Missing values are expressed as NaN in the floating point (float64) variables
@@ -88,7 +89,7 @@ respective missing value.
 | spectral_drop_density | m<sup>-3</sup>.mm<sup>-1</sup> | N | Spectral drop density | float64 |
 | spectral_reflectivity | dB | F | Spectral reflectivity | float64 |
 | time_zone | string | | Time zone | S8 |
-| time | days since -4712-01-01 12:00 UTC | | Time | float64 |
+| time | days since -4713-11-24 UTC (`proleptic\_gregorian` calendar) | | Time | float64 |
 | total_spectra | 1 | MDQ3 | Number of total spectra | int64 |
 | transfer_function | | TF | Transfer function | float64 |
 | valid_spectra_percentage | % | MDQ1 | Percentage of valid spectra | float64 |
