@@ -26,7 +26,8 @@ META = {
 	'time': {
 		'.dims': ['time'],
 		'long_name': 'time',
-		'units': 'days since -4712-01-01 12:00 UTC',
+		'units': 'days since -4713-11-24 12:00 UTC',
+		'calendar': 'proleptic_gregorian',
 	},
 	'level': {
 		'.dims': ['level'],
