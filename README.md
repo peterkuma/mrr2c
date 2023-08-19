@@ -35,17 +35,27 @@ It is recommended to run mrr2c on Linux or a unix-like operating system.
 
 Requirements:
 
-- Python 3 or a compatible distribution of Python such as Anaconda
+- Python 3 (Linux) or Anaconda (Windows and macOS)
+- pipx (Linux)
 
-To install mrr2c and dependencies with the Python package manager:
+To install in Python 3, run the following command in the terminal:
 
 ```sh
-pip3 install mrr2c
+pipx install mrr2c
 ```
 
-**Note:** Append `--user` to install in your home directory on an unix-like
-operating system (make sure `~/.local/bin` is included in the `PATH`
-environmental variable).
+**Note:** Make sure `~/.local/bin` is included in the `PATH` environment
+variable.
+
+To install in Anaconda, run the following command in the terminal (macOS) or
+Anaconda Prompt (Windows):
+
+```sh
+pip install mrr2c
+```
+
+After the installation, you should be able to run the command `mrr2c` in the
+terminal (Linux and macOS) or Anaconda Prompt (Windows).
 
 ## Variables
 
