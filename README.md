@@ -42,6 +42,8 @@ To install in Python 3, run the following command in the terminal:
 
 ```sh
 pipx install mrr2c
+mkdir -p ~/.local/share/man/man1
+ln -s ~/.local/pipx/venvs/mrr2c/share/man/man1/mrr2c.1 ~/.local/share/man/man1/
 ```
 
 **Note:** Make sure `~/.local/bin` is included in the `PATH` environment
