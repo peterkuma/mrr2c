@@ -8,22 +8,34 @@ data to NetCDF. RAW, PRO and AVE files are supported.
 **Note:** Previous versions produced HDF5 files. If you need this type of output
 for compatibility, use mrr2c version 1.0.3.
 
-## Usage
+## How to use
 
-```sh
-mrr2c [--debug] <input> <output>
-```
+#### Usage
 
-Arguments:
+`mrr2c` [*options*] *input* *output*
 
-- `input`: Input MRR-2 `.raw`, `.pro` or `.ave` file.
-- `output`: Output NetCDF (`.nc`) file.
+Converts data in the MRR-2 file *input* to a NetCDF file *output*.
 
-Options:
+#### Arguments
+
+- *input*: Input MRR-2 `.raw`, `.pro` or `.ave` file.
+- *output*: Output NetCDF (`.nc`) file.
+
+#### Options
 
 - `--debug`: Enable debugging output.
 
-See also the man page:
+#### Examples
+
+Convert MRR-2 processed data in `0220.pro` to a NetCDF file `0220.pro`.
+
+```sh
+mrr2c 0220.pro 0220.nc
+```
+
+#### See also
+
+On Linux, see also the manual page:
 
 ```sh
 man mrr2c
