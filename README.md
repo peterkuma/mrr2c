@@ -35,7 +35,7 @@ mrr2c 0220.pro 0220.nc
 
 #### See also
 
-On Linux, see also the manual page:
+On Linux and macOS, see also the manual page:
 
 ```sh
 man mrr2c
