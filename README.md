@@ -31,14 +31,29 @@ man mrr2c
 
 ## Installation
 
-It is recommended to run mrr2c on Linux or a unix-like operating system.
+It is recommended to run mrr2c on Linux.
 
 Requirements:
 
-- Python 3 (Linux) or Anaconda (Windows and macOS)
-- pipx (Linux)
+- [Python 3](https://www.python.org/)
+- pipx (optional)
 
-To install in Python 3, run the following command in the terminal:
+### Linux
+
+On Debian-derived distributions (Ubuntu, Devuan, ...), install the required
+system packages with:
+
+```sh
+sudo apt install python3 python3-pip pipx
+```
+
+On Fedora, install the required system packages with:
+
+```sh
+sudo yum install python3 pipx
+```
+
+Install mrr2c:
 
 ```sh
 pipx install mrr2c
@@ -46,18 +61,43 @@ mkdir -p ~/.local/share/man/man1
 ln -s ~/.local/pipx/venvs/mrr2c/share/man/man1/mrr2c.1 ~/.local/share/man/man1/
 ```
 
-**Note:** Make sure `~/.local/bin` is included in the `PATH` environment
-variable.
+Make sure that `$HOME/.local/bin` is included in the `PATH` environment
+variable if not already. This can be done with `pipx ensurepath`.
 
-To install in Anaconda, run the following command in the terminal (macOS) or
-Anaconda Prompt (Windows):
+You should now be able to run `mrr2c` and see the manual page with `man mrr2c`.
+
+### macOS
+
+Open the Terminal. Install mrr2c with:
+
+```sh
+python3 -m pip install mrr2c
+```
+
+Make sure that `/Users/<user>/Library/Python/<version>/bin` is included in the
+`PATH` environment variable if not already, where `<user>` is your system
+user name and `<version>` is the Python version. This path should be printed
+by the above command. This can be done by adding this line to the file
+`.zprofile` in your home directory and restart the Terminal:
+
+```
+PATH="$PATH:/Users/<user>/Library/Python/<version>/bin"
+```
+
+You should now be able to run `mrr2c` and see the manual page with `man mrr2c`.
+
+### Windows
+
+Install [Python 3](https://www.python.org). In the installer, tick `Add
+python.exe to PATH`.
+
+Open Command Prompt from the Start menu. Install mrr2c with:
 
 ```sh
 pip install mrr2c
 ```
 
-After the installation, you should be able to run the command `mrr2c` in the
-terminal (Linux and macOS) or Anaconda Prompt (Windows).
+You should now be able to run `mrr2c`.
 
 ## Variables
 
