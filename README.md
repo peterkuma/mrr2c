@@ -8,32 +8,25 @@ data to NetCDF. RAW, PRO and AVE files are supported.
 **Note:** Previous versions produced HDF5 files. If you need this type of output
 for compatibility, use mrr2c version 1.0.3.
 
-## How to use
+## Usage
 
-#### Usage
+cl2nc is a command line program to be run a terminal (Linux and macOS) or the
+Command Prompt (Windows).
+
+Synopsis:
 
 `mrr2c` [*options*] *input* *output*
 
 Converts data in the MRR-2 file *input* to a NetCDF file *output*.
 
-#### Arguments
+Arguments:
 
 - *input*: Input MRR-2 `.raw`, `.pro` or `.ave` file.
 - *output*: Output NetCDF (`.nc`) file.
 
-#### Options
+Options:
 
 - `--debug`: Enable debugging output.
-
-#### Examples
-
-Convert MRR-2 processed data in `0220.pro` to a NetCDF file `0220.pro`.
-
-```sh
-mrr2c 0220.pro 0220.nc
-```
-
-#### See also
 
 On Linux and macOS, see also the manual page:
 
@@ -41,14 +34,17 @@ On Linux and macOS, see also the manual page:
 man mrr2c
 ```
 
+### Examples
+
+Convert MRR-2 processed data in `0220.pro` to a NetCDF file `0220.pro`.
+
+```sh
+mrr2c 0220.pro 0220.nc
+```
+
 ## Installation
 
 It is recommended to run mrr2c on Linux.
-
-Requirements:
-
-- [Python 3](https://www.python.org/)
-- pipx (optional)
 
 ### Linux
 
