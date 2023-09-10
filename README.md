@@ -10,7 +10,7 @@ for compatibility, use mrr2c version 1.0.3.
 
 ## Usage
 
-cl2nc is a command line program to be run a terminal (Linux and macOS) or the
+mrr2c is a command line program to be run a terminal (Linux and macOS) or the
 Command Prompt (Windows).
 
 Synopsis:
@@ -76,6 +76,13 @@ variable if not already. This can be done with `pipx ensurepath`.
 
 You should now be able to run `mrr2c` and see the manual page with `man mrr2c`.
 
+To uninstall:
+
+```sh
+pipx uninstall mrr2c
+rm ~/.local/share/man/man1/mrr2c.1
+```
+
 ### macOS
 
 Open the Terminal. Install mrr2c with:
@@ -90,11 +97,17 @@ user name and `<version>` is the Python version. This path should be printed
 by the above command. This can be done by adding this line to the file
 `.zprofile` in your home directory and restart the Terminal:
 
-```
+```sh
 PATH="$PATH:/Users/<user>/Library/Python/<version>/bin"
 ```
 
 You should now be able to run `mrr2c` and see the manual page with `man mrr2c`.
+
+To uninstall:
+
+```sh
+python3 -m pip uninstall mrr2c
+```
 
 ### Windows
 
@@ -108,6 +121,12 @@ pip install mrr2c
 ```
 
 You should now be able to run `mrr2c`.
+
+To uninstall:
+
+```sh
+pip uninstall mrr2c
+```
 
 ## Variables
 
