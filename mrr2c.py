@@ -5,6 +5,7 @@ import sys
 import argparse
 import re
 import logging
+import copy
 import traceback as tb
 import datetime as dt
 import pydash as py_
@@ -386,7 +387,20 @@ def parse_line(line, d, s, fields, status):
 	status['level'] = level
 	return d
 
-def mrr2c(f, warning=lambda: None):
+def split_output(d):
+	n = ds.dim(d, 'time')
+	x = np.diff(d['height'][:,-1])
+	ii = np.where(x != 0)[0]
+	seq = np.arange(n)
+	groups = np.split(seq, ii + 1)
+	dd = []
+	for group in groups:
+		d_tmp = copy.copy(d)
+		ds.select(d_tmp, sel={'time': group})
+		dd += [d_tmp]
+	return dd
+
+def mrr2c(f, warning=lambda: None, split=False):
 	s = parse_size(f)
 	f.seek(0)
 
@@ -432,9 +446,13 @@ def mrr2c(f, warning=lambda: None):
 				line_number + 1,
 				str(e)
 			), sys.exc_info())
-	return d
 
-def main_(input_, output, debug=False):
+	if split:
+		return split_output(d)
+	else:
+		return d
+
+def main_(input_, output, debug=False, split=False):
 	try:
 		with open(input_, 'rb') as f:
 			def warning(s, exc_info):
@@ -444,8 +462,22 @@ def main_(input_, output, debug=False):
 				else:
 					logging.warning(msg)
 					tb.print_exception(*exc_info)
-			d = mrr2c(f, warning=warning)
-			ds.write(output, d)
+			if split:
+				dd = mrr2c(f, warning=warning, split=True)
+				if len(dd) == 0:
+					pass
+				elif len(dd) == 1:
+					ds.write(output + '.nc', dd[0])
+				else:
+					ndigits = int(np.ceil(np.log10(len(dd) + 1)))
+					fmt = '%0' + str(ndigits) + 'd'
+					for i, d in enumerate(dd):
+						n = fmt % (i + 1)
+						output_filename = '%s_%s.nc' % (output, n)
+						ds.write(output_filename, d)
+			else:
+				d = mrr2c(f, warning=warning)
+				ds.write(output, d)
 	except Exception as e:
 		msg = '%s: %s' % (
 			input_,
@@ -460,10 +492,11 @@ def main():
 	parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to NetCDF')
 	parser.add_argument('--debug', action='store_true', help='enable debugging')
 	parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
+	parser.add_argument('-s', action='store_true', help='Split output in multiple files by height resolution')
 	parser.add_argument('input', help='input file')
 	parser.add_argument('output', help='output file')
 	args = parser.parse_args()
-	main_(args.input, args.output, debug=args.debug)
+	main_(args.input, args.output, debug=args.debug, split=args.s)
 
 if __name__ == '__main__':
 	main()

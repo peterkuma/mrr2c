@@ -1,21 +1,20 @@
-.TH mrr2c 1 "8 November 2023"
-
+.TH mrr2c 1 2023-11-08
+.
 .SH NAME
 mrr2c \- convert Metek MRR-2 data files to NetCDF
-
+.
 .SH SYNOPSIS
 .SY mrr2c
 .RI [ options ]
 .I input
 .I output
 .YS
-
+.
 .SH DESCRIPTION
-
 .B mrr2c
 is an open source program which converts Metek Micro Rain Radar 2 (MRR-2)
 data to NetCDF. RAW, PRO and AVE files are supported.
-
+.
 .I input
 is an input MRR-2
 .IR .raw,
@@ -27,26 +26,74 @@ file.
 is an output NetCDF
 .RI ( .nc )
 file.
-
+.
 .SH OPTIONS
-
 .TP
---debug
+.B \-\^\-debug
 Enable debugging output.
-
+.
 .TP
--v, --version
-Print version number and exit.
-
+.BR \-h ", " \-\^\-help
+Print a help message and exit.
+.
+.TP
+.B \-s
+Split output into multiple files by height resolution. If the input file contains
+time periods with differing height resolutions, these time periods are saved
+separately in multiple files. If this option is set,
+.I output
+is assumed to be an output file prefix in the following way. If multiple height
+resolutions are present, the output file names are
+.IR input _ n .nc,
+where
+.I n
+is a sequence of zero-prefixed numbers starting with 1, with a constant number of
+digits as needed to accommodate the entire sequence of files. If only one height
+resolution is present, the output file name is
+.IR input .nc.
+.
+.TP
+.BR \-v ", " \-\^\-version
+Print the version number and exit.
+.
+.SH EXAMPLES
+Convert MRR-2 processed data in
+.I 0220.pro
+to a NetCDF file
+.IR 0220.pro .
+.IP
+.EX
+mrr2c 0220.pro 0220.nc
+.EE
+.P
+It is possible to use
+.UR https://\:www.gnu.org/\:software/\:parallel/
+GNU Parallel
+.UE
+to convert multiple files in parallel if you have more than one CPU core. For
+example, to convert all
+.I .pro
+files in the current directory:
+.IP
+.EX
+parallel mrr2c {} {.}.nc ::: *.pro
+.EE
+.
 .SH COPYRIGHT
-
 Copyright (C) 2017-2023 Peter Kuma.
 .PP
-This program is available under the terms of an MIT license
-(see LICENSE.md in the distribution).
-
+This program is available under the terms of the MIT license
+(see
+.I LICENSE.md
+in the
+.B mrr2c
+distribution).
+.
 .SH SEE ALSO
-
-See <https://github.com/peterkuma/mrr2c>
-for more information about
-.BR mrr2c .
+See the
+.UR https://\:github.com/\:peterkuma/\:mrr2c
+mrr2c GitHub repository
+.UE
+for more information.
+.P
+.BR parallel (1)
