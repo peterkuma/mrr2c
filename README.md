@@ -29,9 +29,9 @@ Options:
 
 - `--debug`: Enable debugging output.
 - `-h`, `--help`: Show help message and exit.
-- `-s`: Split output into multiple files by vertical grid. If the input file
-  contains time periods with differing vertical grids, these time periods are
-  saved separately in multiple files. If this option is set, *output* is
+- `-s`: Split output into multiple files by vertical grid used. If the input
+  file contains time periods with differing vertical grids, these time periods
+  are saved separately in multiple files. If this option is set, *output* is
   assumed to be an output file prefix in the following way. If multiple
   vertical grids are present, the output file names are *output*`_`*n*`.nc`,
   where *n* is a sequence of zero-prefixed numbers starting with 1, with a
