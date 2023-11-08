@@ -15,9 +15,9 @@ setup(
     install_requires=[
         'pydash>=4.0.3',
         'numpy>=1.12.1',
-        'ds-format>=1.1.1',
-        'aquarius-time>=0.1.0',
-		'cftime>=1.5.1',
+        'ds-format>=4.0.1',
+        'aquarius-time>=0.3.0',
+        'cftime>=1.5.1',
     ],
     keywords=['metek', 'radar', 'mrr-2', 'netcdf'],
     url='https://github.com/peterkuma/mrr2c',
