@@ -492,7 +492,7 @@ def main():
 	parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to NetCDF')
 	parser.add_argument('--debug', action='store_true', help='enable debugging')
 	parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
-	parser.add_argument('-s', action='store_true', help='Split output in multiple files by height resolution')
+	parser.add_argument('-s', action='store_true', help='split output in multiple files by vertical grid used')
 	parser.add_argument('input', help='input file')
 	parser.add_argument('output', help='output file')
 	args = parser.parse_args()
