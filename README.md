@@ -30,13 +30,14 @@ Options:
 - `--debug`: Enable debugging output.
 - `-h`, `--help`: Show help message and exit.
 - `-s`: Split output into multiple files by vertical grid. If the input file
-contains time periods with differing vertical grids, these time periods are
-saved separately in multiple files. If this option is set, *output* is assumed to
-be an output file prefix in the following way. If multiple vertical grids are
-present, the output file names are *input*`_`*n*`.nc`, where `n`is a sequence of
-zero-prefixed numbers starting with 1, with a constant number of digits as needed
-to accommodate the entire sequence of files. If only one vertical grid is
-present, the output file name is *input*`.nc`.
+  contains time periods with differing vertical grids, these time periods are
+  saved separately in multiple files. If this option is set, *output* is
+  assumed to be an output file prefix in the following way. If multiple
+  vertical grids are present, the output file names are *input*`_`*n*`.nc`,
+  where *n* is a sequence of zero-prefixed numbers starting with 1, with a
+  constant number of digits as needed to accommodate the entire sequence of
+  files. If only one vertical grid is present, the output file name is
+  *input*`.nc`.
 - `-v`, `--version`: Print the version number and exit.
 
 On Linux and macOS, see also the manual page:
