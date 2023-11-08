@@ -13,7 +13,7 @@ import numpy as np
 import ds_format as ds
 import aquarius_time as aq
 
-__version__ = '2.2.2'
+__version__ = '2.2.3'
 
 NA_INT64 = -9223372036854775808
 

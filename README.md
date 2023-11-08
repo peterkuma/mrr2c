@@ -203,7 +203,7 @@ respective missing value.
 
 ## Release Notes
 
-### 2.2.2 (2023-11-08)
+### 2.2.3 (2023-11-08)
 
 - Added option for splitting output into multiple files by vertical grid used.
 - Improved documentation and manual page.
