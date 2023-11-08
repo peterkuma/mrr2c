@@ -44,6 +44,14 @@ Convert MRR-2 processed data in `0220.pro` to a NetCDF file `0220.pro`.
 mrr2c 0220.pro 0220.nc
 ```
 
+It is possible to use [GNU Parallel](https://www.gnu.org/software/parallel/) to
+convert multiple files in parallel if you have more than one CPU core. For
+example, to convert all `.pro` files in the current directory:
+
+```sh
+parallel mrr2c {} {.}.nc ::: *.pro
+```
+
 ## Installation
 
 It is recommended to run mrr2c on Linux.
