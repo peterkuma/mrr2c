@@ -15,8 +15,9 @@ Command Prompt (Windows).
 
 Synopsis:
 
-`mrr2c` [*options*] *input* *output* \
-`mrr2c` `-h`|`--help`
+`mrr2c` [`--debug`] [`-s`] *input* *output* \
+`mrr2c` `-h`|`--help` \
+`mrr2c` `-v`|`--version`
 
 Converts data in the MRR-2 file *input* to a NetCDF file *output*.
 
