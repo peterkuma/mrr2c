@@ -201,6 +201,11 @@ respective missing value.
 
 ## Release Notes
 
+### 2.2.0 (2023-11-08)
+
+- Added option for splitting output into multiple files by vertical grid used.
+- Improved documentation and manual page.
+
 ### 2.1.1 (2021-12-11)
 
 - Changed time variable calendar to proleptic\_gregorian.
