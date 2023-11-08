@@ -1,13 +1,14 @@
-.TH mrr2c 1 08/12/2020
+.TH mrr2c 1 "8 November 2023"
 
 .SH NAME
 mrr2c \- convert Metek MRR-2 data files to NetCDF
 
 .SH SYNOPSIS
-.B mrr2c
-[--debug]
+.SY mrr2c
+.RI [ options ]
 .I input
 .I output
+.YS
 
 .SH DESCRIPTION
 
@@ -33,9 +34,13 @@ file.
 --debug
 Enable debugging output.
 
+.TP
+-v, --version
+Print version number and exit.
+
 .SH COPYRIGHT
 
-Copyright (C) 2017-2020 Peter Kuma.
+Copyright (C) 2017-2023 Peter Kuma.
 .PP
 This program is available under the terms of an MIT license
 (see LICENSE.md in the distribution).

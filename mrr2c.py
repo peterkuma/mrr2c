@@ -459,6 +459,7 @@ def main_(input_, output, debug=False):
 def main():
 	parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to NetCDF')
 	parser.add_argument('--debug', action='store_true', help='enable debugging')
+	parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
 	parser.add_argument('input', help='input file')
 	parser.add_argument('output', help='output file')
 	args = parser.parse_args()
