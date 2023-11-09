@@ -203,6 +203,11 @@ respective missing value.
 
 ## Release Notes
 
+### 2.2.4 (2023-11-09)
+
+- Fixed processing of profiles with zero or one profile with the `-s` option.
+- Small improvements in the documentation.
+
 ### 2.2.3 (2023-11-08)
 
 - Added option for splitting output into multiple files by vertical levels used.
