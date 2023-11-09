@@ -389,6 +389,8 @@ def parse_line(line, d, s, fields, status):
 
 def split_output(d):
 	n = ds.dim(d, 'time')
+	if n <= 1 or 'height' not in d:
+		return [d]
 	x = np.diff(d['height'][:,-1])
 	ii = np.where(x != 0)[0]
 	seq = np.arange(n)
