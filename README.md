@@ -30,14 +30,14 @@ Options:
 
 - `--debug`: Enable debugging output.
 - `-h`, `--help`: Show help message and exit.
-- `-s`: Split output into multiple files by vertical grid used. If the input
-  file contains time periods with differing vertical grids, these time periods
+- `-s`: Split output into multiple files by vertical levels used. If the input
+  file contains time periods with differing vertical levels, these time periods
   are saved separately in multiple files. If this option is set, *output* is
-  assumed to be an output file prefix in the following way. If multiple
-  vertical grids are present, the output file names are *output*`_`*n*`.nc`,
+  assumed to be an output file prefix in the following way. If multiple sets of
+  vertical levels are present, the output file names are *output*`_`*n*`.nc`,
   where *n* is a sequence of zero-prefixed numbers starting with 1, with a
   constant number of digits as needed to accommodate the entire sequence of
-  files. If only one vertical grid is present, the output file name is
+  files. If only one set of vertical levels is present, the output file name is
   *output*`.nc`.
 - `-v`, `--version`: Print the version number and exit.
 
@@ -205,7 +205,7 @@ respective missing value.
 
 ### 2.2.3 (2023-11-08)
 
-- Added option for splitting output into multiple files by vertical grid used.
+- Added option for splitting output into multiple files by vertical levels used.
 - Improved documentation and manual page.
 
 ### 2.1.1 (2021-12-11)
