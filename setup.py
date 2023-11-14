@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mrr2c',
-    version='2.2.4',
+    version='3.0.0',
     packages=find_packages(),
     py_modules=['mrr2c'],
     entry_points={

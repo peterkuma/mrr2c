@@ -207,6 +207,11 @@ respective missing value.
 
 ## Release Notes
 
+### 3.0.0 (2023-11-14)
+
+- Changed the `-s` option, so that it takes an argument determining whether to
+  perform continuous or discontinuous type of splitting.
+
 ### 2.2.4 (2023-11-09)
 
 - Fixed processing of profiles with zero or one profile with the `-s` option.
