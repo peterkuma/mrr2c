@@ -15,7 +15,7 @@ Command Prompt (Windows).
 
 Synopsis:
 
-`mrr2c` [`--debug`] [`-s`] *input* *output* \
+`mrr2c` [`--debug`] [`-s` *n*] *input* *output* \
 `mrr2c` `-h`|`--help` \
 `mrr2c` `-v`|`--version`
 
