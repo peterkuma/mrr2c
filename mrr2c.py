@@ -387,14 +387,22 @@ def parse_line(line, d, s, fields, status):
 	status['level'] = level
 	return d
 
-def split_output(d):
+def split_output(d, mode=1):
 	n = ds.dim(d, 'time')
 	if n <= 1 or 'height' not in d:
 		return [d]
-	x = np.diff(d['height'][:,-1])
-	ii = np.where(x != 0)[0]
-	seq = np.arange(n)
-	groups = np.split(seq, ii + 1)
+	ht = d['height'][:,-1]
+	if mode == 1:
+		x = np.diff(ht)
+		ii = np.where(x != 0)[0]
+		seq = np.arange(n)
+		groups = np.split(seq, ii + 1)
+	elif mode == 2:
+		_, ii = np.unique(ht, return_index=True)
+		heights = ht[np.sort(ii)]
+		groups = [np.where(ht == h)[0] for h in heights]
+	else:
+		ValueError('Invalid split mode')
 	dd = []
 	for group in groups:
 		d_tmp = copy.copy(d)
@@ -402,7 +410,7 @@ def split_output(d):
 		dd += [d_tmp]
 	return dd
 
-def mrr2c(f, warning=lambda: None, split=False):
+def mrr2c(f, warning=lambda: None, split=0):
 	s = parse_size(f)
 	f.seek(0)
 
@@ -449,13 +457,15 @@ def mrr2c(f, warning=lambda: None, split=False):
 				str(e)
 			), sys.exc_info())
 
-	if split:
-		return split_output(d)
+	if split > 0:
+		return split_output(d, mode=split)
 	else:
 		return d
 
-def main_(input_, output, debug=False, split=False):
+def main_(input_, output, debug=False, split=0):
 	try:
+		if split not in [0, 1, 2]:
+			raise ValueError('Invalid split argument value')
 		with open(input_, 'rb') as f:
 			def warning(s, exc_info):
 				msg = '%s: %s' % (input_, s)
@@ -464,8 +474,8 @@ def main_(input_, output, debug=False, split=False):
 				else:
 					logging.warning(msg)
 					tb.print_exception(*exc_info)
-			if split:
-				dd = mrr2c(f, warning=warning, split=True)
+			if split > 0:
+				dd = mrr2c(f, warning=warning, split=split)
 				if len(dd) == 0:
 					pass
 				elif len(dd) == 1:
@@ -491,14 +501,28 @@ def main_(input_, output, debug=False, split=False):
 			raise IOError(msg).with_traceback(sys.exc_info()[2])
 
 def main():
-	parser = argparse.ArgumentParser(description='Convert Metek MRR-2 data files to NetCDF')
-	parser.add_argument('--debug', action='store_true', help='enable debugging')
-	parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
-	parser.add_argument('-s', action='store_true', help='split output in multiple files by vertical levels used')
+	parser = argparse.ArgumentParser(
+		description='Convert Metek MRR-2 data files to NetCDF'
+	)
+	parser.add_argument('--debug',
+		action='store_true',
+		help='enable debugging'
+	)
+	parser.add_argument('-v', '--version',
+		action='version',
+		version='%(prog)s ' + __version__
+	)
+	parser.add_argument('-s',
+		action='store',
+		nargs=1,
+		default=[0],
+		type=int,
+		help='split output in multiple files by vertical levels used'
+	)
 	parser.add_argument('input', help='input file')
 	parser.add_argument('output', help='output file')
 	args = parser.parse_args()
-	main_(args.input, args.output, debug=args.debug, split=args.s)
+	main_(args.input, args.output, debug=args.debug, split=args.s[0])
 
 if __name__ == '__main__':
 	main()

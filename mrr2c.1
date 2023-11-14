@@ -42,19 +42,32 @@ Enable debugging output.
 Print a help message and exit.
 .
 .TP
-.B \-s
-Split output into multiple files by vertical levels used. If the input file
-contains time periods with differing vertical levels, these time periods are
-saved separately in multiple files. If this option is set,
-.I output
-is assumed to be an output file prefix in the following way. If multiple
-sets of vertical levels are present, the output file names are
-.IR output _ n .nc,
-where
+.BI "\-s " n
+.
+Split output into multiple files by vertical levels used. If
 .I n
-is a sequence of zero-prefixed numbers starting with 1, with a constant number
-of digits as needed to accommodate the entire sequence of files. If only one
-set of vertical levels is present, the output file name is
+is 1, time intervals with different sets vertical levels are stored in separate
+output files. Profiles stored in the same output file are always continuous in
+time. If
+.I n
+is 2, profiles with different sets of vertical levels are stored in separate
+files. Profiles stored in the same output file may be discontinuous in time.
+If
+.I n
+is 0, this option is disabled. If
+.I n
+is 1 or 2,
+.I output
+is assumed to be an output file prefix in the following way. If profiles with
+multiple different sets of vertical levels are present in the input file, the
+output file names are
+.IR output _ i .nc,
+where
+.I i
+is a sequence of zero-prefixed numbers starting with 1, and having a constant
+number of digits as needed to accommodate the entire sequence of files. If all
+profiles in the input file have the same vertical levels, the output file name
+is
 .IR output .nc.
 .
 .TP

@@ -30,15 +30,19 @@ Options:
 
 - `--debug`: Enable debugging output.
 - `-h`, `--help`: Show help message and exit.
-- `-s`: Split output into multiple files by vertical levels used. If the input
-  file contains time periods with differing vertical levels, these time periods
-  are saved separately in multiple files. If this option is set, *output* is
-  assumed to be an output file prefix in the following way. If multiple sets of
-  vertical levels are present, the output file names are *output*`_`*n*`.nc`,
-  where *n* is a sequence of zero-prefixed numbers starting with 1, with a
-  constant number of digits as needed to accommodate the entire sequence of
-  files. If only one set of vertical levels is present, the output file name is
-  *output*`.nc`.
+- `-s` *n*: Split output into multiple files by vertical levels used. If *n* is
+  1, time intervals with different sets vertical levels are stored in separate
+  output files. Profiles stored in the same output file are always continuous in
+  time. If *n* is 2, profiles with different sets of vertical levels are
+  stored in separate files. Profiles stored in the same output file may be
+  discontinuous in time. If *n* is 0, this option is disabled. If *n* is 1 or
+  2, *output* is assumed to be an output file prefix in the following way. If
+  profiles with multiple different sets of vertical levels are present in the
+  input file, the output file names are *output*`_`*i*`.nc`, where *i* is a
+  sequence of zero-prefixed numbers starting with 1, and having a constant
+  number of digits as needed to accommodate the entire sequence of files. If
+  all profiles in the input file have the same vertical levels, the output file
+  name is *output*`.nc`.
 - `-v`, `--version`: Print the version number and exit.
 
 On Linux and macOS, see also the manual page:
