@@ -515,6 +515,7 @@ def main():
 	parser.add_argument('-s',
 		action='store',
 		nargs=1,
+		metavar='N',
 		default=[0],
 		type=int,
 		help='split output in multiple files by vertical levels used'
